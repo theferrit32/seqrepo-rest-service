@@ -5,7 +5,7 @@
 import logging
 
 from biocommons.seqrepo import SeqRepo
-from flask import current_app
+from flask import current_app, g
 
 _logger = logging.getLogger(__name__)
 
@@ -21,8 +21,8 @@ def get_seqrepo():
 
 def _get_or_create(k, f, create=True):
     k = '_' + k
-    o = getattr(_get_or_create, k, None)
+    o = getattr(g, k, None)
     if o is None and create:
         o = f()
-        setattr(_get_or_create, k, o)
+        setattr(g, k, o)
     return o

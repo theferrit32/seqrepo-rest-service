@@ -83,7 +83,8 @@ def main():
         return redirect("/refget/1/ui/")
 
     _logger.info("Also watching " + str(spec_files))
-    cxapp.run(host="0.0.0.0", extra_files=spec_files)
+    port = os.environ.get("SEQREPO_REST_PORT", "5000")
+    cxapp.run(host="0.0.0.0", port=port, extra_files=spec_files)
 
 
 if __name__ == "__main__":
